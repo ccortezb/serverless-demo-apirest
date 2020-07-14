@@ -24,15 +24,21 @@ Serverless Example using Lambda, Api Gateway and DynamoDB
 
 ## 3. Empezamos la creación de funciones Lambda.
 
+Usaremos los archivos .js que estamos en este repositorio.
 
 ### Create book Lambda: 
 	name: create-book
 	language: nodejs 10.x
 	role: LambdaRoleForDynamoDBAccess
-	configure test events
+
+### configure test events:
+
+Configurar los eventos de test en una función lambda, creando un nuevo nombre de testing. 
 
 
 ### Update test events:
+
+Adicionalmente, Agregando un json de request como el siguiente.
 
 	{
 	  "body": "{\"title\": \"Carlos Cortex Cloud Book\"}"
@@ -67,6 +73,8 @@ https://cccndgwk5k.execute-api.us-east-1.amazonaws.com/production/books
 "body": "[{\"id\":\"9d1f4b369a5619e5e5967ddac2b463db\",\"title\":\"Carlos Cortez Cloud Book\"}]"
 }
 
+
+### Usemos la terminal o un cliente de Postman para probar:
 
 curl -X GET \
   https://cccndgwk5k.execute-api.us-east-1.amazonaws.com/production/books \
@@ -145,6 +153,10 @@ curl -X GET \
 
 
 ### Test event:
+
+Para obtener el id, vamos a nuestra tabla de DynamoDB y elijamos un Id de ejemplo para probar la eliminación.
+
+Adicionalmente actualizaremos a este json de request en la configuración de eventos de testing:
 
 {
   "pathParameters": {
