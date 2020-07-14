@@ -1,55 +1,55 @@
-# serverless-demo-apirest
+# Serverless-demo-apirest
 Serverless Example using Lambda, Api Gateway and DynamoDB
 
-Diagrama y flujos de trabajo:
+## Diagrama y flujos de trabajo:
 
 ![alt text](https://s3.amazonaws.com/imagenes.cennti.com/serverless-demo-api-rest.png)
 
-1. Creamos la base de datos en DynamoDB
+## 1. Creamos la base de datos en DynamoDB
 
-##Database Setup
+### Database Setup
 	dynamodb:
 		table name: books
 		partition key: id
 		default settings
 
 
-2. Luego creamos un Rol en IAM para que sea usado por Lambda
+##2. Luego creamos un Rol en IAM para que sea usado por Lambda
 
-##Creating the Lambda Role
+### Creating the Lambda Role
 	role: lambda
 	policy: dynamodb:*
 	name: LambdaRoleForDynamoDBAccess
 
 
-3. Empezamos la creación de funciones Lambda.
+## 3. Empezamos la creación de funciones Lambda.
 
 
-##Create book Lambda: 
+### Create book Lambda: 
 	name: create-book
 	language: nodejs 10.x
 	role: LambdaRoleForDynamoDBAccess
 	configure test events
 
 
-##Update test events:
+### Update test events:
 
 	{
 	  "body": "{\"title\": \"Carlos Cortex Cloud Book\"}"
 	}
 
 
-##View in dynamodb.
+### Review in dynamodb.
 
 
-##Creating Get Books Lambda:
+## 5. Creating Get Books Lambda and API:
 	name: get-books
 	language: nodejs 10.x
 	role: LambdaRoleForDynamoDBAccess
 	configure test events: default
 
 
-##Creating a GET API
+## 6. Creating a GET API
 	go to apigateway service
 	type: regional API
 	API name: Books
@@ -58,7 +58,8 @@ Diagrama y flujos de trabajo:
 		deploy API:
 			new stage: production
 
-###test new API:
+### test new API:
+
 https://cccndgwk5k.execute-api.us-east-1.amazonaws.com/production/books
 
 {
@@ -72,7 +73,7 @@ curl -X GET \
   -H 'cache-control: no-cache'
 
 
-##Creating a POST API
+## 7. Creating a POST API
 	go to resource: /books 
 		create method: POST
 			type: lambda function
@@ -91,7 +92,7 @@ curl -Xv POST \
 
 
 
-##Get book Lambda: 
+## 8. Get book Lambda: 
 	name: get-book
 	language: nodejs 10.x
 	role: LambdaRoleForDynamoDBAccess
@@ -104,7 +105,7 @@ curl -Xv POST \
 }
 
 
-###Test Function:
+### Test Function:
 
 Response:
 {
@@ -114,7 +115,7 @@ Response:
 
 
 
-##Creating a GET API for single Book
+## 9. Creating a GET API for single Book
 	go to resource: /books 
 		create resource: {id}
 			create method: GET
@@ -136,14 +137,14 @@ curl -X GET \
 
 
 
-##Delete Book Lambda:
+## 10. Delete Book Lambda:
 	name: delete-book
 	language: nodejs 10.x
 	role: LambdaRoleForDynamoDBAccess
 	configure test events: default
 
 
-###Test event:
+### Test event:
 
 {
   "pathParameters": {
@@ -152,13 +153,13 @@ curl -X GET \
 }
 
 
-##Update Book Lamabda:
+### 11. Update Book Lambda:
 	name: update-book
 	language: nodejs 10.x
 	role: LambdaRoleForDynamoDBAccess
 	configure test events: default
 
-###Test event:
+### Test event:
 
 {
   "pathParameters": {
@@ -169,7 +170,7 @@ curl -X GET \
 
 
 
-##Creating a POST API for Delete book
+## 12. Creating a POST API for Delete book
 	go to resource: /books 
 		create resource: {id}
 			create method: UPDATE
@@ -189,7 +190,7 @@ curl -X DELETE \
 
 
 
-##Creating a POST API for Update book
+## 13. Creating a POST API for Update book
 	go to resource: /books 
 		create resource: {id}
 			create method: POST
