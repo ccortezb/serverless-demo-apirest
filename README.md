@@ -1,6 +1,11 @@
 # serverless-demo-apirest
 Serverless Example using Lambda, Api Gateway and DynamoDB
 
+Diagrama y flujos de trabajo:
+
+![alt text](https://s3.amazonaws.com/imagenes.cennti.com/serverless-demo-api-rest.png)
+
+1. Creamos la base de datos en DynamoDB
 
 ##Database Setup
 	dynamodb:
@@ -8,10 +13,17 @@ Serverless Example using Lambda, Api Gateway and DynamoDB
 		partition key: id
 		default settings
 
+
+2. Luego creamos un Rol en IAM para que sea usado por Lambda
+
 ##Creating the Lambda Role
 	role: lambda
 	policy: dynamodb:*
 	name: LambdaRoleForDynamoDBAccess
+
+
+3. Empezamos la creación de funciones Lambda.
+
 
 ##Create book Lambda: 
 	name: create-book
